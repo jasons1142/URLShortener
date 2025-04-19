@@ -5,7 +5,7 @@ if (!MONGO_URI) {
     throw new Error("MONGO_URI environment variable is undefined");
 }
 
-const DB_NAME = "mp-5"
+const DB_NAME = "urlShortener"
 export const URLS_COLLECTION = "urls-collection";
 
 let client: MongoClient | null = null;
