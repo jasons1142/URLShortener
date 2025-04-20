@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
-//@ts-expect-error
+// @ts-expect-error Expected error
 export default async function AliasRedirect({ params }) {
     const alias = params.alias;
 
