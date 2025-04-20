@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 
 //@ts-expect-error
-export default async function RedirectPage({ params }) {
+export default async function AliasRedirect({ params }) {
     const alias = params.alias;
 
     const collection = await getCollection(URLS_COLLECTION);
@@ -16,8 +16,8 @@ export default async function RedirectPage({ params }) {
     }
 
     return (
-        <p className = "p-4 text-center text-red-600">
-            Alias not found
+        <p className = "p-3 text-center text-red-700">
+            Unfound Alias
         </p>
     );
 }

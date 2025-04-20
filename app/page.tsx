@@ -1,11 +1,10 @@
 'use client';
-
 import { useState } from 'react';
 
 export default function Home() {
-  const [url, setUrl] = useState('');
   const [alias, setAlias] = useState('');
-  const [shortUrl, setShortUrl] = useState('');
+  const [url, setUrl] = useState('');
+  const [shortenedUrl, setShortenedUrl] = useState('');
   const [error, setError] = useState('');
 
   const handleSubmit = async () => {
@@ -17,24 +16,24 @@ export default function Home() {
 
     const data = await res.json();
     if (res.ok) {
-      setShortUrl(`${window.location.origin}/${data.alias}`);
+      setShortenedUrl(`${window.location.origin}/${data.alias}`);
       setError('');
     } else {
-      setShortUrl('');
+      setShortenedUrl('');
       setError(data.error);
     }
   };
 
   return (
-    <main className = "flex flex-col items-center p-8 max-w-lg mx-auto">
-      <h1 className = "text-3xl font-bold">URL Shortener</h1>
-      <p>Shortern your long URLs into compact, shareable links</p>
+    <main className = "flex flex-col items-center p-8 min-h-screen bg-stone-400">
+      <h1 className = "text-3xl font-bold text-black">URL Shortener</h1>
+      <p className = "mb-8 text-black">Shortern your long URLs into compact, shareable links</p>
 
-      <div className = "bg-blue-700 p-6 rounded-lg text-white w-full">
-        <h2>Shorten a URL</h2>
-        <p>Enter a long URL to create a shorter, shareable link</p>
-        <h3>URL</h3>
-
+      <div className = "bg-blue-600 p-6 rounded-lg text-white w-full">
+        <h2 className = "font-bold text-3xl">Shorten a URL</h2>
+        <p className = "mb-4">Enter a long URL to create a shorter, shareable link</p>
+        
+        <label>URL</label>
         <input
           className="border border-gray-300 rounded p-2 mb-3 w-full"
           placeholder = "https://example.com/very/long/url"
@@ -42,6 +41,7 @@ export default function Home() {
           onChange = {(e) => setUrl(e.target.value)}
         />
 
+        <label>Custom Alias</label>
         <input
           className="border border-gray-300 rounded p-2 mb-3 w-full"
           placeholder = "your-custom-alias"
@@ -53,29 +53,39 @@ export default function Home() {
           onClick = {handleSubmit}
           className = "bg-green-700 text-white px-4 py-2 rounded hover:bg-green-200 transition w-full"
         >Shorten</button>
-
-        {shortUrl && (
-          <div className = "mt-4 flex items-center space-x-2">
-            <span>
-              Your shortened URL:{" "}
+        
+        
+        {error && (
+          <p className= "text-red-600 mt-2 font-medium text-center">{error}</p>
+        )}
+        
+        <div className = "mt-4 flex items-center space-x-2">
+          <span>
+            Your shortened URL:{" "}
+            { shortenedUrl ? (
               <a
-                href = {shortUrl}
-                className = "underline text-blue-500"
+                href = {shortenedUrl}
+                className = "underline text-white-500"
                 target = "_blank"
                 rel = "noopener noreferrer"
               >
-                {shortUrl}
+                {shortenedUrl}
               </a>
-            </span>
-            <button
-              onClick= {() => navigator.clipboard.writeText(shortUrl)}
-              className = "px-2 py-1 text-sm bg-gray-500 rounded hover:bg-gray-400 transition"
-            >
-              Copy
-            </button>
-          </div>
-        )}
-        {error && <p className = "mt-4 text-red-600">{error}</p>}
+            ) : (
+              <span className="text-black-400">Not yet generated</span>
+            )}
+          </span>
+          <button
+            onClick= {() => shortenedUrl && navigator.clipboard.writeText(shortenedUrl)}
+            className = {`px-2 py-1 text-sm bg-gray-100 rounded transition ${
+              shortenedUrl
+                ? "bg-gray-500 hover:bg-gray-400 text-white"
+                : "bg-gray-300 cursor-not-allowed text-gray-500"
+            }`}
+          >
+            Copy
+          </button>
+        </div>
       </div>
     </main>
   );
