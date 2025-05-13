@@ -4,6 +4,13 @@ import getCollection from "@/db";
 export async function POST(req: NextRequest) {
     const { alias, url } = await req.json();
 
+    if (!alias || alias.includes('/')) {
+        return NextResponse.json(
+          { error: 'Alias cannot be empty or contain slashes' },
+          { status: 400 }
+        );
+    }
+
     try {
         new URL(url);
     } catch {
