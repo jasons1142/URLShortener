@@ -29,4 +29,5 @@ If you'd like to run this locally:
 
 # Author
 
-The author of this repository is Jason Senecharles, a senior at Boston University studying Computer Science, aspiring to be a software engineer, and looking for New Grad Roles
+Jason Senecharles – Senior CS student at Boston University
+Passionate about full-stack development, currently seeking new grad software engineering roles.
