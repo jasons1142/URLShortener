@@ -5,6 +5,8 @@ A web app developed to shorten URLS using custom aliases
 # Features
 - Add URL and shorten it using a custom-selected alias
 - Prevents duplication of aliases or invalid aliases
+- Real time alias validation
+- Redirect functionality
 
 # Tech Stack
 - Next.js
@@ -20,10 +22,10 @@ You can test out this URL Shortener hosted on the Vercel link below
 
 If you'd like to run this locally:
 
-git clone https://github.com/jasons1142/URLShortener.git
-cd URLShortener
-npm install
-npm run dev
+- git clone https://github.com/jasons1142/URLShortener.git
+- cd URLShortener
+- npm install
+- npm run dev
 
 # Author
 
